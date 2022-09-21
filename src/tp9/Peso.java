@@ -2,37 +2,101 @@ package tp9;
 
 import java.util.Scanner;
 
-public class Peso {
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Ingrese su altura en cm: ");
-
-        float pesoIdeal, altura = sc.nextFloat();
-
-        System.out.print("Ingrese 1 si es hombre y 2 si es mujer: ");
-
-        int genero = sc.nextInt();
+public class CalcularElPeso {
 
 
-        while (genero < 0 || genero > 1) {
+    //Atributos
 
-            System.out.print("Opción no válida, vuelva a ingresar: ");
+    private int altura;
+    private int peso;
+    private String sexo;
 
-            genero = sc.nextInt();
+    //Metodos
+
+    Scanner Leer = new Scanner(System.in);//Usado para leer por consola
+
+    public void pedirAltura(){
+        System.out.println("Ingrese su altura en cm");
+        setAltura(Leer.nextInt());
+    }
+
+    public void pedirGenero(){
+        boolean opcion = true;
+        setSexo(Leer.nextLine());
+        while (opcion) {
+
+            System.out.println("Ingrese su Genero:\n'h' para hombre\n-'m' para mujer\n");
+            setSexo(Leer.nextLine());
+
+            if ((this.sexo.equals("h")) || (this.sexo.equals("m"))){
+                opcion = false;
+            }else{
+                System.out.println("Error: Ingrese una opcion valida");
+            }
+
         }
+    }
 
-        if (genero == 1) {
-
-            pesoIdeal = altura - 110;
-
-        } else {
-
-            pesoIdeal = altura - 120;
+    public void calcularPeso(){
+        if (getSexo()=="h"){
+            setPeso(getAltura()-110);
         }
+        else{
+            setPeso(getAltura()-120);
+        }
+    }
 
-        System.out.println("El peso ideal de la persona es: " + pesoIdeal);
+    public void mostarPeso(){
+        System.out.println("Su peso ideal será: "+ getPeso());
+    }
+
+
+
+
+    //Setters
+
+    public void setAltura( int altura){
+        this.altura = altura;
+    }
+
+    public void setSexo (String sexo){
+        this.sexo = sexo;
+    }
+
+    public void setPeso(int peso){
+        this.peso = peso;
+    }
+
+    //Getters
+
+    public int getAltura(){
+        return this.altura;
+    }
+
+    public  String getSexo(){
+        return sexo;
+    }
+
+    public int getPeso(){
+        return this.peso;
+    }
+
+    public static void main (String[] args){
+
+        CalcularElPeso c1 = new CalcularElPeso();
+
+        c1.pedirAltura();
+        c1.pedirGenero();
+        c1.calcularPeso();
+        c1.mostarPeso();
+
 
     }
+
+
+
+
+
+
+
 }
